@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin | Prof. Isaac Zeb-Obipi</title>
+  <script>(function(){var t;try{t=localStorage.getItem('zo_theme')}catch(e){}if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)t='dark';document.documentElement.setAttribute('data-theme',t||'light')})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .gate { min-height: 100svh; display: grid; place-items: center; padding: 24px; background: var(--tint); }
+    .gate-card { width: min(440px, 100%); text-align: center; }
+    .gate-card .gate-ico { width: 56px; height: 56px; border-radius: 16px; background: var(--ink); color: #fff; display: grid; place-items: center; margin: 0 auto 18px; }
+    .gate-card h1 { font-size: 28px; margin-bottom: 8px; }
+    .gate-card p { color: var(--muted); margin-bottom: 22px; }
+    .gate-card .btn { margin: 4px; }
+  </style>
+</head>
+<body>
+  <main class="gate" id="gate"><div class="card gate-card" id="gateCard"></div></main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/icons.js"></script>
+  <script src="../js/defaults.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/admin.js"></script>
+  <script>
+    window.ADMIN_ROUTE = true;
+    (async function () {
+      const card = document.getElementById('gateCard');
+      function show(html) { card.innerHTML = html; hydrateIcons(card); }
+      async function check() {
+        await UI.refreshUser();
+        if (UI.user && UI.user.role === 'admin') { document.getElementById('gate').style.display = 'none'; Admin.open(); return; }
+        document.getElementById('gate').style.display = '';
+        if (UI.user) {
+          show('<div class="gate-ico">' + icon('lock', 24) + '</div><h1>Not an administrator</h1><p>' + UI.esc(UI.user.email || '') + ' does not have admin access.</p><button class="btn btn-ghost" id="gOut">Sign out</button> <a class="btn btn-dark" href="../">Back to website</a>');
+          document.getElementById('gOut').onclick = async () => { await UI.signOut(); check(); };
+        } else {
+          show('<div class="gate-ico">' + icon('shield', 24) + '</div><h1>Administrator sign in</h1><p>Sign in to manage the website, bookings and articles.</p><button class="btn btn-dark" id="gIn">Sign in</button> <a class="btn btn-ghost" href="../">Back to website</a>');
+          document.getElementById('gIn').onclick = async () => { await UI.openAuth(); check(); };
+        }
+      }
+      await check();
+      API.onAuthChange(() => check());
+    })();
+  </script>
+</body>
+</html>
