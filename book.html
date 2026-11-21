@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book a Session | Prof. Isaac Zeb-Obipi</title>
+  <meta name="description" content="Request an in-person meeting, video meeting, phone call, mentorship session or speaking invitation with Prof. Isaac Zeb-Obipi, Vice-Chancellor of Rivers State University.">
+  <meta name="theme-color" content="#0a0a0a">
+  <script>(function(){var t;try{t=localStorage.getItem('zo_theme')}catch(e){}if(!t&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)t='dark';document.documentElement.setAttribute('data-theme',t||'light')})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body id="top" class="book-page">
+  <div id="chrome"></div>
+
+  <main class="book-main">
+    <section class="book-hero">
+      <div class="wrap">
+        <span class="eyebrow">Book a session</span>
+        <h1>Request time with <em>Prof. Zeb-Obipi</em></h1>
+        <p>Choose a format, pick a time and tell him what you would like to discuss. Every request is reviewed personally and you will see the decision on your account.</p>
+        <ol class="how"><li><b>1</b>Choose a session</li><li><b>2</b>Pick a date and time</li><li><b>3</b>Share your details</li><li><b>4</b>Wait for approval</li></ol>
+      </div>
+    </section>
+
+    <div class="wrap book-grid">
+      <div class="book-left">
+        <div class="card wizard" id="wizard"></div>
+        <div class="card" id="requests"><div id="requestsMount"></div></div>
+      </div>
+      <aside class="book-right"><div class="card summary" id="summary"></div><div class="card note-card" id="noteCard"></div></aside>
+    </div>
+  </main>
+
+  <footer id="footer" class="footer"></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/defaults.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/book.js"></script>
+</body>
+</html>
